@@ -1,0 +1,14 @@
+{
+  "name": "ga4-ecom-test-data-generator",
+  "version": "1.0.0",
+  "description": "Sends synthetic GA4 ecommerce events via Measurement Protocol for BigQuery export testing",
+  "type": "module",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "dry-run": "node src/index.js --dry-run",
+    "debug": "node src/index.js --dry-run --verbose"
+  }
+}

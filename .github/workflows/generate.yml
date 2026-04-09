@@ -1,0 +1,32 @@
+name: Generate GA4 Test Data
+on:
+  schedule:
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+    inputs:
+      sessions:
+        description: 'Number of sessions to generate'
+        required: false
+        default: ''
+      dry_run:
+        description: 'Use debug endpoint (validate only)'
+        type: boolean
+        default: false
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Generate test data
+        env:
+          GA4_MEASUREMENT_ID: ${{ secrets.GA4_MEASUREMENT_ID }}
+          GA4_API_SECRET: ${{ secrets.GA4_API_SECRET }}
+        run: |
+          ARGS=""
+          if [ "${{ inputs.dry_run }}" = "true" ]; then ARGS="$ARGS --dry-run"; fi
+          if [ -n "${{ inputs.sessions }}" ]; then ARGS="$ARGS --sessions=${{ inputs.sessions }}"; fi
+          node src/index.js $ARGS
