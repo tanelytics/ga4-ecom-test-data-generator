@@ -57,6 +57,13 @@ export function generateSession(sessionType, startTimeMicros) {
 
   // View 1-2 products
   const viewedProducts = pickN(listProducts, randomBetween(1, 2));
+
+  // Select items from the list (click)
+  for (const product of viewedProducts) {
+    const index = listProducts.indexOf(product);
+    addEvent(events.buildSelectItem(ctx, product, category, index));
+  }
+
   for (const product of viewedProducts) {
     addEvent(events.buildViewItem(ctx, product));
   }

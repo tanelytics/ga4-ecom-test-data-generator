@@ -40,6 +40,18 @@ export function buildViewItemList(sessionCtx, products, listName) {
   };
 }
 
+export function buildSelectItem(sessionCtx, product, listName, index) {
+  return {
+    name: 'select_item',
+    params: {
+      ...baseParams(sessionCtx),
+      item_list_id: listName.toLowerCase().replace(/\s+/g, '_'),
+      item_list_name: listName,
+      items: [toItemPayload(product, 1, index)],
+    },
+  };
+}
+
 export function buildViewItem(sessionCtx, product) {
   return {
     name: 'view_item',
