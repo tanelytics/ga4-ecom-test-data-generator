@@ -69,7 +69,7 @@ async function main() {
   const dayStart = new Date(now);
   dayStart.setUTCHours(6, 0, 0, 0);
   const dayEnd = new Date(now);
-  dayEnd.setUTCHours(22, 0, 0, 0);
+  dayEnd.setUTCHours(20, 0, 0, 0);
 
   // Convert to microseconds
   const dayStartMicros = dayStart.getTime() * 1000;
